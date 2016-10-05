@@ -16,6 +16,37 @@
 
 from __future__ import print_function
 
+import inspect
+#babak
+#import json
+
+import pdb
+#from pudb import set_trace;
+import pudb
+from pprint import pprint
+
+#grep_d(vars(cs), "a")
+# def grep_d(input, match):
+#     """ grep equivalent for debugging in pdb """
+#
+#     if type(input) is dict:
+#
+#         lines = input.split('\n')
+#
+#         for line in lines:
+#
+#             if match in line:
+#
+#                 print (line)
+#
+#     if type(input) is dict:
+#
+#         for line in ("{" + "\n".join("{}: {}".format(k, v) for k, v in input.items()) + "}"):
+#
+#             if match in line:
+#
+#                 print (line)
+
 import argparse
 import copy
 import os
@@ -2303,6 +2334,30 @@ def do_qos_create(cs, args):
     qos_specs = cs.qos_specs.create(args.name, keypair)
     _print_qos_specs(qos_specs)
 
+
+@utils.arg('name',
+           metavar='<name>',
+           help='Name of new QoS specifications.')
+@utils.arg('metadata',
+           metavar='<key=value>',
+           nargs='+',
+           default=[],
+           help='QoS specifications.')
+@utils.service_type('volumev3')
+def do_iops_available(cs, args):
+    """submit available IOPS"""
+
+    keypair = None
+    if args.metadata is not None:
+        keypair = _extract_metadata(args)
+
+    #pudb.set_trace()
+
+    report = cs.qos_specs.create(args.name, keypair)
+
+    print("IOPS Report", report)
+
+    print("cs --> ", cs)
 
 @utils.service_type('volumev3')
 def do_qos_list(cs, args):

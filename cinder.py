@@ -2,6 +2,7 @@
 # PBR Generated from u'console_scripts'
 
 import sys
+import pdb
 
 from cinderclient.shell import main
 

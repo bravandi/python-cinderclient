@@ -30,6 +30,7 @@ from cinderclient import exceptions
 from cinderclient.openstack.common.apiclient import base as common_base
 from cinderclient import utils
 
+import pdb
 
 # Valid sort directions and client sort keys
 SORT_DIR_VALUES = ('asc', 'desc')
@@ -313,8 +314,15 @@ class Manager(common_base.HookableMixin):
             return self.resource_class(self, body, loaded=True, resp=resp)
 
     def _create(self, url, body, response_key, return_raw=False, **kwargs):
+
         self.run_hooks('modify_body_for_create', body, **kwargs)
         resp, body = self.api.client.post(url, body=body)
+
+        # babak
+        if 'ack_iops_report' in body:
+            # pdb.set_trace()
+            return body
+
         if return_raw:
             return common_base.DictWithMeta(body[response_key], resp)
 

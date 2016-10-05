@@ -77,6 +77,8 @@ class QoSSpecsManager(base.ManagerWithFind):
         :rtype: :class:`QoSSpecs`
         """
 
+        # babak --> here will make the rpc
+
         body = {
             "qos_specs": {
                 "name": name,
